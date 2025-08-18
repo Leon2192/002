@@ -12,7 +12,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Pagination } from "swiper/modules";
+import { Keyboard, Pagination, Autoplay } from "swiper/modules"; // 👈 agregado
 import "swiper/css";
 import "swiper/css/keyboard";
 import "swiper/css/pagination";
@@ -26,7 +26,6 @@ const images = [
   "/images/002/5.jpeg",
   "/images/002/6.jpeg",
 ];
-
 
 const CARD_RATIO = "4 / 3";
 
@@ -48,10 +47,20 @@ const Gallery = () => {
   const { ref } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <Box ref={ref} sx={{ py: 8, px: 2, maxWidth: "1200px", mx: "auto", backgroundColor: "#BBC9EE",  }}>
+    <Box
+      ref={ref}
+      sx={{
+        py: 8,
+        px: 2,
+        maxWidth: "1200px",
+        mx: "auto",
+        backgroundColor: "#BBC9EE",
+      }}
+    >
       <Typography
         variant="h3"
         sx={{
+          display: { xs: "block", sm: "none" },
           mb: 4,
           textAlign: "center",
           fontFamily: "'Great Vibes', cursive",
@@ -62,14 +71,14 @@ const Gallery = () => {
         Galería
       </Typography>
 
-      {/* MOBILE - SWIPER (contenidas) */}
       {isMobile ? (
         <Swiper
-          modules={[Keyboard, Pagination]}
+          modules={[Keyboard, Pagination, Autoplay]} // 👈 se agrega autoplay
           pagination={{ clickable: true }}
           keyboard
           slidesPerView={1}
           spaceBetween={16}
+          autoplay={{ delay: 3000, disableOnInteraction: false }} // 👈 config
           style={{ width: "100%" }}
         >
           {images.map((src, index) => (
@@ -95,7 +104,7 @@ const Gallery = () => {
                     inset: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "contain", // siempre contenida en mobile
+                    objectFit: "contain",
                     display: "block",
                     cursor: "pointer",
                   }}
@@ -105,7 +114,7 @@ const Gallery = () => {
           ))}
         </Swiper>
       ) : (
-        // DESKTOP - GRID (uniforme, mismo ancho/proporción)
+        // DESKTOP - GRID
         <Grid container spacing={2} justifyContent="center">
           {images.map((src, index) => (
             <Grid item key={index} xs={6} sm={4} md={3}>
@@ -113,7 +122,7 @@ const Gallery = () => {
                 sx={{
                   position: "relative",
                   width: "100%",
-                  aspectRatio: CARD_RATIO, // todas iguales
+                  aspectRatio: CARD_RATIO,
                   borderRadius: 2,
                   overflow: "hidden",
                 }}
@@ -129,7 +138,7 @@ const Gallery = () => {
                     inset: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover", // rellena manteniendo proporción (puede recortar un poco)
+                    objectFit: "cover",
                     cursor: "pointer",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                     "&:hover": {
@@ -218,12 +227,13 @@ const Gallery = () => {
               <ArrowForwardIosIcon fontSize="small" />
             </IconButton>
 
-            {/* Visor */}
+            {/* Visor con autoplay también */}
             <Swiper
               initialSlide={startIndex}
               keyboard
               onSwiper={(swiper) => (swiperRef.current = swiper)}
-              modules={[Keyboard]}
+              modules={[Keyboard, Autoplay]}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
               style={{ width: "100%" }}
             >
               {images.map((src, index) => (

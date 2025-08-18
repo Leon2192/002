@@ -127,7 +127,7 @@ const Gift = () => {
             {/* Ícono arriba del modal */}
             <Box
   component="img"
-  src="/images/001/hearticon.gif"
+  src="/images/002/REGALO.gif"
   alt="Ceremonia"
   sx={{
     width: 125,       // equivalente a fontSize: 100
