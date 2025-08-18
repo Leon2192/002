@@ -16,7 +16,7 @@ const Dresscode = () => {
         minHeight: "30vh",
         py: 8,
         px: 2,
-        backgroundColor: "#DDE0CA", // verde pastel suave
+        backgroundColor: "#83A2D8", // verde pastel suave
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -33,7 +33,7 @@ const Dresscode = () => {
         >
             <Box
   component="img"
-  src="/images/001/dress1.gif"
+  src="/images/002/asistencia.gif"
   alt="Ceremonia"
   sx={{
     width: 125,       

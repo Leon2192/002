@@ -1,89 +1,59 @@
-import {
-    Box,
-    useMediaQuery,
-    useTheme,
-  } from "@mui/material";
-  import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-  const Thanks = () => {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  
-    const desktopImage = "/images/001/desktop1.webp";
-    const mobileImage = "/images/001/mobile2.webp";
-  
-   
-  
-    return (
+const Thanks = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const desktopImage = "/images/002/thanks.png";
+  const mobileImage = "/images/002/gracias2.png";
+
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        height: "50vh",
+        m: 0,
+        p: 0,
+        // En mobile: cover (llena y recorta). En desktop: contain (se ve completa).
+        backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
+        backgroundSize: isMobile ? "cover" : "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        // Color de fondo para “letterboxing” cuando usamos contain
+        backgroundColor: theme.palette.background.default,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        overflow: "hidden",
+      }}
+    >
+      {/* Capa opcional (por ahora transparente) */}
       <Box
         sx={{
-          position: "relative",
-          height: "50vh",
-          margin: 0,
-          padding: 0,
-          backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          inset: 0,
+          background:
+            "transparent", 
+          zIndex: 1,
+        }}
+      />
+
+      {/* Contenido principal */}
+      <Box
+        sx={{
+          zIndex: 2,
+          px: 2,
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          overflow: "hidden",
+          transition: "transform 1s ease",
         }}
       >
-        {/* Capa oscura */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "transparent",
-            zIndex: 1,
-          }}
-        />
-  
-        {/* Contenido principal */}
-        <Box
-          sx={{
-            zIndex: 2,
-            px: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            transition: "transform 1s ease",
-          }}
-        >
-      
-  
-        </Box>
-
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 20,
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: 2,
-            animation: "bounce 2s infinite",
-            fontSize: "3rem",
-            "@keyframes bounce": {
-              "0%, 20%, 50%, 80%, 100%": {
-                transform: "translateX(-50%) translateY(0)",
-              },
-              "40%": {
-                transform: "translateX(-50%) translateY(-10px)",
-              },
-              "60%": {
-                transform: "translateX(-50%) translateY(-5px)",
-              },
-            },
-          }}
-        >
-          
-        </Box>
       </Box>
-    );
-  };
-  
-  export default Thanks;
-  
+    </Box>
+  );
+};
+
+export default Thanks;

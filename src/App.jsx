@@ -11,6 +11,7 @@ import Dresscode from "./components/Dresscode";
 import SuggestSong from "./components/SugerirCancion";
 import Qr from "./components/QR";
 import Gallery from "./components/Gallery/GalleryPremium";
+import Thanks from "./components/Thanks";
 
 
 function Loader() {
@@ -69,6 +70,7 @@ function App() {
       <Confirm />
       <Dresscode />
       <SuggestSong />
+      <Thanks/>
    
     </>
   );

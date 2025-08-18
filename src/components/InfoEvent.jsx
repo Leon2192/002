@@ -23,7 +23,7 @@ const InfoEvent = () => {
       sx={{
         py: 6,
         px: 2,
-        backgroundColor: "#F6F4F0",
+        backgroundColor: "#F6EEDC",
       }}
     >
       <Grid
@@ -38,11 +38,11 @@ const InfoEvent = () => {
             <Box sx={{ textAlign: "center" }}>
             <Box
   component="img"
-  src="/images/001/starsicon.gif"
+  src="/images/002/fiesta.gif"
   alt="Ceremonia"
   sx={{
-    width: 125,       // equivalente a fontSize: 100
-    height: 125,
+    width: 100,       // equivalente a fontSize: 100
+    height: 100,
     mb: 1
   }}
 />

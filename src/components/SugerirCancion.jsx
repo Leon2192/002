@@ -15,7 +15,7 @@ const SuggestSong = () => {
         minHeight: "40vh",
         py: 8,
         px: 2,
-        backgroundColor: "#F3F1F2", 
+        backgroundColor: "#F6EEDC", 
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -34,7 +34,7 @@ const SuggestSong = () => {
           {/* Icono con animación tipo "latido" */}
           <Box
   component="img"
-  src="/images/001/musicicon.gif"
+  src="/images/002/sugerencia.gif"
   alt="Ceremonia"
   sx={{
     width: 125,       // equivalente a fontSize: 100
@@ -49,7 +49,7 @@ const SuggestSong = () => {
             
                 fontFamily: "'Prata'",
                 fontSize: { xs: "1.2rem", md: "1.5rem" },
-                color: "#536449",
+                color: "#0B1D4D",
                 mb: 1,
             }}
           >
@@ -61,7 +61,7 @@ const SuggestSong = () => {
             sx={{
               fontFamily: "'Prata'",
                 fontSize: { xs: "1.2rem", md: "1.5rem" },
-                color: "#536449",
+                color: "#0B1D4D",
                 mb: 4
             }}
           >
@@ -77,7 +77,7 @@ const SuggestSong = () => {
   sx={{
     borderRadius: 999,
     px: 4,
-    backgroundColor: "#536449",
+    backgroundColor: "#0B1D4D",
     fontFamily: "'Prata'",
     color: "#ffffff",
     boxShadow: "none",
@@ -96,7 +96,7 @@ const SuggestSong = () => {
     },
     "&:hover": {
       backgroundColor: "#fff",
-      color: "#536449",
+      color: "#0B1D4D",
       transform: "scale(1.05)", // efecto de agrandar en hover
     },
   }}

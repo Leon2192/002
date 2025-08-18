@@ -30,7 +30,7 @@ const Gift = () => {
       sx={{
         py: 8,
         px: 2,
-        backgroundColor: "#274490",
+        backgroundColor: "#F6EEDC",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -46,7 +46,7 @@ const Gift = () => {
         >
             <Box
   component="img"
-  src="/images/001/hearticon.gif"
+  src="/images/002/REGALO.gif"
   alt="Ceremonia"
   sx={{
     width: 125,       // equivalente a fontSize: 100
@@ -154,13 +154,7 @@ const Gift = () => {
             }}>
               Nombre del Titular: Dessimoni Debora Ines
               <br />
-              CBU: 0720053388000006165686
-              <br />
-              Alias: DEBO.DESSI.RIO
-              <br />
-              DNI: 24.838.787
-              <br />
-              Banco Santander 
+              Alias: leoydeby50.mp
             </Typography>
 
    

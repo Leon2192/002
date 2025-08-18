@@ -15,7 +15,7 @@ const Qr = () => {
         minHeight: "30vh",
         py: 8,
         px: 2,
-        backgroundColor: "#83A2D8", // fondo blanco
+        backgroundColor: "#83A2D8", 
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -34,7 +34,7 @@ const Qr = () => {
           <Box display="flex" justifyContent="center" mb={2}>
             <Box
               component="img"
-              src="/images/qr-logo.png"
+              src="/images/002/qr.png"
               alt="Código QR"
               sx={{
                 width: 200,

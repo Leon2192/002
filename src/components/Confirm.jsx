@@ -8,7 +8,7 @@ const Confirm = () => {
         minHeight: "40vh",
         py: 8,
         px: 2,
-        backgroundColor: "#6A81G1",
+        backgroundColor: "#BBC9EE",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -21,7 +21,7 @@ const Confirm = () => {
         {/* Icono animado */}
         <Box
           component="img"
-          src="/images/001/confirm.gif"
+          src="/images/002/confirm.gif"
           alt="Ceremonia"
           sx={{
             width: 125,
@@ -60,7 +60,7 @@ const Confirm = () => {
         {/* Botón */}
         <ButtonLinks
           label="Confirmar Asistencia"
-          href="https://docs.google.com/forms/d/e/1FAIpQLScxgDT68F2PwJIK1nRWFMeNmR_ZdwZzkcnVCX5l8q3i5-1L-A/viewform?usp=header"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdHSoF31u_6XP6Ku7wwSzZy1pKMS-9AfEVfhqgDXn4YCSmipg/viewform?usp=header"
           newTab
         />
       </Box>

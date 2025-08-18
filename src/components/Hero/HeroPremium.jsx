@@ -15,8 +15,8 @@ const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const desktopImage = "/images/002/PORTADA-COMPU.webp";
-  const mobileImage = "/images/002/PORTADA-CELU.webp";
+  const desktopImage = "/images/002/desktop.webp";
+  const mobileImage = "/images/002/mob.webp";
 
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);

@@ -48,7 +48,7 @@ const Gallery = () => {
   const { ref } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <Box ref={ref} sx={{ py: 8, px: 2, maxWidth: "1200px", mx: "auto", backgroundColor: "#F6EEDC",  }}>
+    <Box ref={ref} sx={{ py: 8, px: 2, maxWidth: "1200px", mx: "auto", backgroundColor: "#BBC9EE",  }}>
       <Typography
         variant="h3"
         sx={{
