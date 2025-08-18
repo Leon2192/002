@@ -12,7 +12,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Pagination, Autoplay } from "swiper/modules"; // 👈 agregado
+import { Keyboard, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/keyboard";
 import "swiper/css/pagination";
@@ -57,6 +57,7 @@ const Gallery = () => {
         backgroundColor: "#BBC9EE",
       }}
     >
+      {/* Título solo en mobile */}
       <Typography
         variant="h3"
         sx={{
@@ -71,14 +72,15 @@ const Gallery = () => {
         Galería
       </Typography>
 
+      {/* MOBILE: carrusel con autoplay */}
       {isMobile ? (
         <Swiper
-          modules={[Keyboard, Pagination, Autoplay]} // 👈 se agrega autoplay
+          modules={[Keyboard, Pagination, Autoplay]}
           pagination={{ clickable: true }}
           keyboard
           slidesPerView={1}
           spaceBetween={16}
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // 👈 config
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           style={{ width: "100%" }}
         >
           {images.map((src, index) => (
@@ -105,6 +107,7 @@ const Gallery = () => {
                     width: "100%",
                     height: "100%",
                     objectFit: "contain",
+                    objectPosition: "center",
                     display: "block",
                     cursor: "pointer",
                   }}
@@ -114,7 +117,7 @@ const Gallery = () => {
           ))}
         </Swiper>
       ) : (
-        // DESKTOP - GRID
+        // DESKTOP: grilla
         <Grid container spacing={2} justifyContent="center">
           {images.map((src, index) => (
             <Grid item key={index} xs={6} sm={4} md={3}>
@@ -139,6 +142,7 @@ const Gallery = () => {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: "center",
                     cursor: "pointer",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                     "&:hover": {
@@ -193,12 +197,13 @@ const Gallery = () => {
               }}
             />
 
-            {/* Flecha izq */}
+            {/* Flechas: ocultas en mobile para evitar desalineación */}
             <IconButton
               onClick={() => swiperRef.current?.slidePrev()}
               sx={{
+                display: { xs: "none", sm: "flex" },
                 position: "absolute",
-                left: { xs: 4, sm: -40 },
+                left: -40,
                 top: "50%",
                 transform: "translateY(-50%)",
                 color: "#fff",
@@ -210,12 +215,12 @@ const Gallery = () => {
               <ArrowBackIosNewIcon fontSize="small" />
             </IconButton>
 
-            {/* Flecha der */}
             <IconButton
               onClick={() => swiperRef.current?.slideNext()}
               sx={{
+                display: { xs: "none", sm: "flex" },
                 position: "absolute",
-                right: { xs: 4, sm: -40 },
+                right: -40,
                 top: "50%",
                 transform: "translateY(-50%)",
                 color: "#fff",
@@ -227,7 +232,7 @@ const Gallery = () => {
               <ArrowForwardIosIcon fontSize="small" />
             </IconButton>
 
-            {/* Visor con autoplay también */}
+            {/* Visor con autoplay (navegación por swipe en mobile) */}
             <Swiper
               initialSlide={startIndex}
               keyboard
@@ -247,6 +252,7 @@ const Gallery = () => {
                       maxWidth: { xs: "100%", sm: "90vw" },
                       maxHeight: { xs: "80vh", sm: "90vh" },
                       objectFit: "contain",
+                      objectPosition: "center",
                       borderRadius: 2,
                       display: "block",
                       mx: "auto",
