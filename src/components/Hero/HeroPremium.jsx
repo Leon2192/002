@@ -1,13 +1,15 @@
 import {
   Box,
+  Button,
   useMediaQuery,
   useTheme,
   IconButton,
+  Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import PauseIcon from "@mui/icons-material/Pause";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const Hero = () => {
@@ -18,34 +20,37 @@ const Hero = () => {
   const mobileImage = "/images/002/mob.webp";
 
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true); // arranca en true porque queremos que suene
-
-  // Auto-reproducción al montar
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.play().catch((error) => {
-        console.error("No se pudo reproducir el audio automáticamente:", error);
-        setIsPlaying(false); // si falla el autoplay (por bloqueo del navegador), ponemos estado en pausa
-      });
-    }
-  }, []);
+  const [isPlaying, setIsPlaying] = useState(false); // inicia en pausa
+  const [showOverlay, setShowOverlay] = useState(true); // overlay de bienvenida
 
   const toggleAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
-  
+
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
     } else {
-      // Desmuteamos en la primera interacción
       audio.muted = false;
       audio.play().catch((err) => console.error("Error al reproducir:", err));
       setIsPlaying(true);
     }
   };
-  
+
+  const handleEnterWithMusic = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.muted = false;
+      audio.play().catch((err) => console.error("Error al reproducir:", err));
+      setIsPlaying(true);
+    }
+    setShowOverlay(false);
+  };
+
+  const handleEnterWithoutMusic = () => {
+    setIsPlaying(false);
+    setShowOverlay(false);
+  };
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -73,14 +78,16 @@ const Hero = () => {
       }}
     >
       {/* Capa oscura */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "transparent",
-          zIndex: 1,
-        }}
-      />
+      {showOverlay && (
+  <Box
+    sx={{
+      position: "absolute",
+      inset: 0,
+      backgroundColor: "rgba(0,0,0,0.4)",
+      zIndex: 1,
+    }}
+  />
+)}
 
       {/* Contenido principal */}
       <Box
@@ -95,72 +102,132 @@ const Hero = () => {
         }}
       ></Box>
 
+      {/* Overlay de bienvenida */}
+      {showOverlay && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 5,
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 3,
+            color: "#fff",
+            textAlign: "center",
+            px: 2,
+          }}
+        >
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Bienvenidos ✨
+          </Typography>
+          <Button
+  variant="contained"
+  onClick={handleEnterWithMusic}
+  startIcon={<MusicNoteIcon />}
+  sx={{
+    px: 4,
+    py: 1.5,
+    fontSize: "1rem",
+    backgroundColor: "#849CDD",
+    "&:hover": {
+      backgroundColor: "#6f86c5", // tono más oscuro para hover
+    },
+  }}
+>
+  Ingresar con Audio
+</Button>
+
+<Button
+  variant="contained"
+  onClick={handleEnterWithoutMusic}
+  startIcon={<MusicNoteIcon />}
+  sx={{
+    px: 4,
+    py: 1.5,
+    fontSize: "1rem",
+    backgroundColor: "#849CDD",
+    "&:hover": {
+      backgroundColor: "#6f86c5", // mismo hover
+    },
+  }}
+>
+  Ingresar sin Audio
+</Button>
+
+        </Box>
+      )}
+
       {/* Botón de música */}
-      <IconButton
-        onClick={toggleAudio}
-        sx={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          zIndex: 3,
-          backgroundColor: "rgba(255,255,255,0.7)",
-          color: "#000",
-          width: 50,
-          height: 50,
-          borderRadius: "50%",
-          boxShadow: 2,
-          animation: "bounceMusic 1.5s infinite",
-          "@keyframes bounceMusic": {
-            "0%, 20%, 50%, 80%, 100%": {
-              transform: "translateY(0)",
+      {!showOverlay && (
+        <IconButton
+          onClick={toggleAudio}
+          sx={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            zIndex: 3,
+            backgroundColor: "rgba(255,255,255,0.7)",
+            color: "#000",
+            width: 50,
+            height: 50,
+            borderRadius: "50%",
+            boxShadow: 2,
+            animation: "bounceMusic 1.5s infinite",
+            "@keyframes bounceMusic": {
+              "0%, 20%, 50%, 80%, 100%": {
+                transform: "translateY(0)",
+              },
+              "40%": {
+                transform: "translateY(-6px)",
+              },
+              "60%": {
+                transform: "translateY(-3px)",
+              },
             },
-            "40%": {
-              transform: "translateY(-6px)",
+            "&:hover": {
+              backgroundColor: "rgba(255,255,255,0.9)",
             },
-            "60%": {
-              transform: "translateY(-3px)",
-            },
-          },
-          "&:hover": {
-            backgroundColor: "rgba(255,255,255,0.9)",
-          },
-        }}
-      >
-        {isPlaying ? <PauseIcon /> : <MusicNoteIcon />}
-      </IconButton>
+          }}
+        >
+          {isPlaying ? <PauseIcon /> : <MusicNoteIcon />}
+        </IconButton>
+      )}
 
       {/* Audio element */}
-      <audio ref={audioRef} src="/images/002/song.mp3" preload="auto" autoPlay
-  muted
-  loop />
+      <audio ref={audioRef} src="/images/002/song.mp3" preload="auto" loop muted />
 
       {/* Flecha animada */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 5,
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 2,
-          animation: "bounce 2s infinite",
-          fontSize: "3rem",
-          "@keyframes bounce": {
-            "0%, 20%, 50%, 80%, 100%": {
-              transform: "translateX(-50%) translateY(0)",
+      {!showOverlay && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 5,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 2,
+            animation: "bounce 2s infinite",
+            fontSize: "3rem",
+            "@keyframes bounce": {
+              "0%, 20%, 50%, 80%, 100%": {
+                transform: "translateX(-50%) translateY(0)",
+              },
+              "40%": {
+                transform: "translateX(-50%) translateY(-10px)",
+              },
+              "60%": {
+                transform: "translateX(-50%) translateY(-5px)",
+              },
             },
-            "40%": {
-              transform: "translateX(-50%) translateY(-10px)",
-            },
-            "60%": {
-              transform: "translateX(-50%) translateY(-5px)",
-            },
-          },
-        }}
-      >
-        <a href="#info" style={{ color: "#fff", textDecoration: "none" }}>
-          <KeyboardArrowDownIcon fontSize="inherit" />
-        </a>
-      </Box>
+          }}
+        >
+          <a href="#info" style={{ color: "#fff", textDecoration: "none" }}>
+            <KeyboardArrowDownIcon fontSize="inherit" />
+          </a>
+        </Box>
+      )}
     </Box>
   );
 };
