@@ -18,13 +18,13 @@ import "swiper/css/keyboard";
 import "swiper/css/pagination";
 
 const images = [
-  "/images/002/2.jpeg",
-  "/images/002/1.jpeg",
-  "/images/002/3.jpeg",
-  "/images/002/4.jpeg",
-  "/images/002/7.jpeg",
-  "/images/002/5.jpeg",
-  "/images/002/6.jpeg",
+  "/images/002/foto1.jpeg",
+  "/images/002/foto2.jpeg",
+  "/images/002/foto3.jpeg",
+  "/images/002/foto4.jpeg",
+  "/images/002/foto5.jpeg",
+  "/images/002/foto6.jpeg",
+  "/images/002/foto7.jpeg",
 ];
 
 const CARD_RATIO = "4 / 3";
