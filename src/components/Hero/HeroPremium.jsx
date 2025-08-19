@@ -34,17 +34,18 @@ const Hero = () => {
   const toggleAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
-
+  
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
     } else {
-      audio.play().catch((error) => {
-        console.error("No se pudo reproducir el audio:", error);
-      });
+      // Desmuteamos en la primera interacción
+      audio.muted = false;
+      audio.play().catch((err) => console.error("Error al reproducir:", err));
       setIsPlaying(true);
     }
   };
+  
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -129,7 +130,9 @@ const Hero = () => {
       </IconButton>
 
       {/* Audio element */}
-      <audio ref={audioRef} src="/images/002/song.mp3" preload="auto" />
+      <audio ref={audioRef} src="/images/002/song.mp3" preload="auto" autoPlay
+  muted
+  loop />
 
       {/* Flecha animada */}
       <Box
